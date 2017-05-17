@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+{# posts display block #}
+
+    <h2>All Posts here</h2>
+    {% if object_list %}
+        {% for p in  object_list %}
+    		<p>
+
+    		<h4><a href=" {% url 'post_detail' p.id %} ">{{ p.title }}</a></h4>
+    		  <div>  
+    		  {% if post.image %}        
+    	 			<a href="{% url 'post_detail' p.id %}"><img src="{{ p.image.url }}" alt=""> </a>
+              {% endif %} </div>
+
+    		{{ p.description|safe|linebreaks|truncatechars:100 }} <br>
+    		<a href=" {% url 'post_detail' p.id %} ">read more</a></p>   	
+    	{% endfor %}
+
+    {% else %}
+            <h4>No published post in site</h4>    
+    {% endif %}
+
+
+{# paginator block #}
+{% if is_paginated %}
+    
+<div class="paginator">
+        <div id="paginator"> 
+            {% if page_obj.has_previous %}
+                <a href="?page =  {{page_obj.previous_page_number}} "> previous </a>   
+            {% endif %}
+                    {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+
+            {% if page_obj.has_next %}
+               <a href="?page = 
+                {{page_obj.next_page_number}}"> next</a>           
+            {% endif %}
+        </div>
+ {% endif %}   
+{% endblock content %}

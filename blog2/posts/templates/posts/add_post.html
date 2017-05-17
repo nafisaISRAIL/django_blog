@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+	<h1>Add post</h1>
+		{% if message %}
+		    {{ message }}
+		{% endif %}
+	
+	<form class='form-post' enctype="multipart/form-data" method='post' action=" {% url 'add_post' %} ">
+	{% csrf_token %}
+    	{{ form.as_p}}
+    	<button type='submit'> Save </button>
+    </form> <a href=""></a>
+{% endblock content %}

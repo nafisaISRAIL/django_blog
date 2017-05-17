@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<h1>Add author</h1>
+
+		{% if message %}
+		    {{ message }}
+		{% endif %}
+
+			<form method= 'post' action = '' enctype="multipart/form-data">   
+				{% csrf_token %}
+					<p>	{{ user_form.as_p }}</p>
+					<p>{{ author_form.as_p }}</p>
+					<button type ='submit' >Save</button>
+			</form>
+		</p>	
+    
+{% endblock content %}

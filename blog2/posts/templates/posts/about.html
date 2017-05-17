@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    ul{
+    	list-style-type: none;
+    }
+
+</style>
+<div>
+<div class="about-site">
+<h2>All travellers here</h2>
+	<p>When we compiled our original list of the 24 Best Travel Blogs and Websites, we thought we were creating an index that would be useful for readers and for ourselves. Little did we know it would become the most popular feature we've ever published.
+
+We're doing things a little differently in 2017, asking previous winners of the Blogs & Websites feature to nominate their favorite travel sites. The results give a refreshing glimpse into a tight-knit travel community filled with old pals and new voices.</p>
+</div>
+		
+	<div>
+	<p><strong>This is the list of out authors</strong></p>		
+		<ul class='author-list'>
+		{% for user in users %}
+			<li><a href=" {% url "about-author" user.author.id %} ">{{ user.author }}</a></li>
+			
+		{% endfor %}
+		</ul>
+</div>   
+{% endblock content %}

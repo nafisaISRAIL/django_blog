@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div>
+    <h3> {{ post.title }} </h3>
+    {% if post.image %}        
+    	<div> <img src=" {{MEDIA_URL }}{{ post.image }}"> </div>
+    {% endif %}
+    
+    <div>
+    	<p> {{ post.description|safe }} </p></div>
+    		<div>
+    			<p>
+	    			<a href=" {% url "about-author" post.author.id %} ">Author: {{ post.author }} 
+	    			</a>
+	    		</p>
+	    	</div>
+	</div>
+	<div><h5>--------------------------------------------------------------------------------</h5> Comments</div>
+	<h5>--------------------------------------------------------------------------------</h5>
+	<div>
+	<p>  {% if user.is_authenticated %}
+	    	<div>
+				<form action="." method='post'>
+					{% csrf_token %}
+					{{ form.as_p }}
+					<input type="submit" value="add comment">
+				</form>
+		    </div>
+	
+	   {% endif %}
+
+	</p>
+
+</div>
+	<div>
+		{% if comments %}
+		{% for comment in comments  %}
+		<p>
+		<table>
+			<tr>
+				<td>{{ comment.user.author }}</td>
+				<td> / {{ comment.created_at }} </td>
+			</tr>
+			<tr><strong>{{ comment.comment }}</strong></tr>
+		</table>
+		</p>			
+		{% endfor %}
+		    
+		
+		{% endif %}
+	</div>
+
+
+{% endblock content %}
+
+        

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<form action=" {% url 'add-post-with-formset' %} " method='post'>
+{% csrf_token %}
+{{formset.management_form}}
+	{% for form in formset %}
+		<div class='form'> {{ form.as_p }} </div>
+		<p>=====================================================================</p>		
+	{% endfor %}
+
+	<button type='submit'> Save </button>
+</form>
+    
+{% endblock content %}

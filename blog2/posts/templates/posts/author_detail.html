@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<style>
+    ul{
+    	list-style-type: none;
+    }
+
+</style>
+
+<div>
+	<h3>{{ author }} </h3>
+</div>
+
+<div class="table">
+	<table>
+		<tr align="left" valign="top">
+			<td>     {% if author.image %}
+                     <img src="{{MEDIA_URL}}{{ author.image}}">
+                     {% endif %} </td>
+			
+		</tr>
+		<tr>
+			<td>{{ author.biography }} </td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<div><p> <strong>{{ author }}'s posts:</strong></p></div>
+					<div> {% for p in posts %}
+					<ul><li><a href=" {% url 'post_detail' p.id %} "> {{ p.title|upper }} </a></li></ul>	
+							{% endfor %} 
+					</div>
+			</td>
+		</tr>
+	</table>
+</div>
+<p></p>
+
+    
+{% endblock content %}

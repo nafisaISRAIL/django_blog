@@ -1,0 +1,100 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title> Travell in Kyrgyzstan </title> 
+
+        {% block css %}
+            <link type = 'text/css' rel="stylesheet" href='{% static 'style.css' %}'>
+    {% endblock css %}
+
+</head>
+<body>
+
+<div id="wrapper">
+
+	<div id="menu">            
+        <ul>
+            <li><a href=" {% url 'main' %} ">Main</a></li>
+            <li><a href="  {% url 'about' %} ">About us</a></li>
+            <li><a href="  {% url 'contact' %} ">Contacts</a></li>
+                {% if user.is_authenticated %} 
+            <li><a href=" {% url 'singout' %} ">Sing out</a></li>
+            {% else %}
+                
+            <li><a href=" {% url 'singup' %} ">Registration</a></li>
+            <li><a href=" {% url 'singin' %} ">Log in</a></li>
+            {% endif %} 
+        </ul>	
+    
+    </div> <!-- end of menu -->
+
+    <div id="left_column">
+
+        
+        <div id="sidebar">
+        	<div>
+
+                <form action="" method="get">
+                    <input type="text" name="query" placeholder="search" value=' {{ request.GET.query }} '/>
+                    <input type="submit" value="Search" />
+                </form>
+
+            </div>
+            <div class="cleaner_h40"></div>
+            <h4>Category</h4>
+            
+                <div >
+                    {% if categories %}
+                       {% for c in categories %}
+                        <h4> <a href=" {% url 'get_post_by_category' c.id %} ">{{ c.title }} </a></h4>
+                    {% endfor %}
+                            
+                    {% endif %}
+
+                    <p>
+                        <div>   
+                            {% if user.is_authenticated %}
+                            <h4>User name: <a href=" {% url 'personal_page' user.id %} ">{{ user.username }}  </a></h4> 
+                            {% endif %} </div>
+                    </p>
+                </div> 
+                               
+                
+
+            <div class="cleaner"></div>
+            
+        </div> <!-- end of sidebar --> 
+    
+    </div> <!-- end of left_column -->
+    
+    <div id="right_column">
+        
+        <div id="main">
+        
+            <div class="post_section">
+            
+                <p>     
+
+                    {% block content %}
+
+                    
+                        
+                    {% endblock content %}
+                    
+            </div>
+		</div>
+    
+  <div class="cleaner"></div>
+  </div> 
+    <!-- end of main -->
+  <div class="cleaner_h20"></div>
+  {% block javascript %}
+      
+  {% endblock javascript %}
+</div> <!-- end of warpper -->
+
+</body>
+</html>

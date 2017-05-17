@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div>
+<p>
+<table>
+	<tr>
+		<td>{{ user.author }}</td>
+
+		<td><a href=" {% url "add-author" %} ">
+		<button type="submit">Update profile</button>
+	    </a>
+	    </td>
+	</tr>
+</table>
+	
+</div>
+</p>
+</div>
+
+<p>  <h3>Your published posts</h3>
+	<table>
+	    {% for post in published_posts %}
+	    <tr>
+	    	<td>
+			    <li> {{ post.title }} </li>				
+			</td>
+	    	<td>	    		
+	    			<td><form action="{% url 'post-delete' post.id %} " method ='post'>
+		    		{% csrf_token %}
+		   			{{ form }}
+		    		<button type="submit">Delete</button>	
+				</form></td>
+	    			<td><a href="{% url 'post-update' post.id %}"><button>Update</button></a></td>
+	    	</td>
+	    </tr>
+		{% endfor %}
+	</table> </p>
+	<p></p>
+<p>
+{# Draft posts #}
+	<h3>Your draft posts</h3>
+	<table>
+	    {% for post in draft_posts %}
+	    <tr>
+	    	<td>
+			    <li> {{ post.title }} </li>				
+			</td>
+	    	<td>	    		
+	    			<td><form action="{% url 'post-delete' post.id %} " method ='post'>
+		    		{% csrf_token %}
+		   			{{ form }}
+		    		<button type="submit">Delete</button>	
+				</form></td>
+	    			<td><a href="{% url 'post-update' post.id %}"><button>Update</button></a></td>
+	    	</td>
+	    </tr>
+		{% endfor %}
+	</table>
+</p>
+
+<p>
+	<h5><a href=" {% url 'add_post' %} ">Add new post</a>
+	</h5>
+</p>
+	
+{% endblock content %}
+
+{% comment %}
+
+
+		    	
+
+{% endcomment %}

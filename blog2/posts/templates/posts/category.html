@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div>
+	<h3>Posts in  '{{ category.title }}' category</h3>
+</div>
+
+    <div>
+	{% for post in posts_by_category %}
+		<p><h3><a href="  {% url 'post_detail' post.id %} "> {{ post.title }} </a></h3>	
+		{{ post.description|linebreaks|truncatechars:100  }} <br>
+		<a href=" {% url 'post_detail' post.id %} ">read more...</a>
+		 </p>  
+	{% endfor %}
+
+</div>
+    
+{% endblock content %}
